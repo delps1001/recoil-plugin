@@ -58,7 +58,7 @@ public class RecoilOverlay extends Overlay {
     this.plugin = plugin;
     this.recoilConfig = config;
     loadRecoilImage();
-    previouslyScaledImage.scale = config.scale();
+    previouslyScaledImage.scale = 1;
     previouslyScaledImage.scaledBufferedImage = recoilImage;
   }
 
