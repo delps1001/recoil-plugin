@@ -30,14 +30,15 @@ public class RecoilPlugin extends Plugin {
   private boolean recoilPresent = true;
 
   @Override
-  protected void startUp() throws Exception {
+  protected void startUp() {
     log.info("Recoil Plugin started!");
     overlayManager.add(recoilOverlay);
   }
 
   @Override
-  protected void shutDown() throws Exception {
+  protected void shutDown() {
     log.info("Recoil plugin stopped!");
+    overlayManager.remove(recoilOverlay);
   }
 
   @Subscribe
