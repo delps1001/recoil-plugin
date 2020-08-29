@@ -31,9 +31,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.plugins.PluginInstantiationException;
@@ -42,6 +39,7 @@ import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayPriority;
 import net.runelite.client.ui.overlay.components.ImageComponent;
+import net.runelite.client.util.ImageUtil;
 
 @Slf4j
 public class RecoilOverlay extends Overlay {
@@ -64,14 +62,8 @@ public class RecoilOverlay extends Overlay {
     previouslyScaledImage.scaledBufferedImage = recoilImage;
   }
 
-  private static void loadRecoilImage() throws PluginInstantiationException {
-    try {
-      InputStream in = RecoilPlugin.class.getResourceAsStream("/ring_of_recoil.png");
-      recoilImage = ImageIO.read(in);
-    } catch (IOException e) {
-      log.error("Error loading recoil image", e);
-      throw new PluginInstantiationException(e);
-    }
+  private static void loadRecoilImage() {
+    recoilImage = ImageUtil.getResourceStreamFromClass(RecoilPlugin.class, "/ring_of_recoil.png");
   }
 
   @Override
